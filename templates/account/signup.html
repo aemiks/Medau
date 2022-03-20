@@ -1,0 +1,56 @@
+{% extends "base_panel.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+
+<body class="start">
+		<main>
+			<div class="layout">
+				<!-- Start of Sign Up -->
+				<div class="main order-md-2">
+					<div class="start">
+						<div class="container">
+							<div class="col-md-12">
+								<div class="content">
+									<h1>Create Account</h1>
+									<div class="third-party">
+										<a href="{% url 'account_login' %}" class="btn item bg-yellow">
+											<i class="fa-brands fa-google fa-xl"></i>
+										</a>
+									</div>
+									<p>or use your info for registration:</p>
+
+                                      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                        {% endif %}
+                                        <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+                                      </form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End of Sign Up -->
+				<!-- Start of Sidebar -->
+				<div class="aside order-md-1">
+					<div class="container">
+						<div class="col-md-12">
+							<div class="preference">
+								<h2>Welcome Back!</h2>
+								<p>To keep connected with your friends please login with your personal info.</p>
+								<a href="{% url 'account_login' %}" class="btn button">Sign In</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End of Sidebar -->
+			</div> <!-- Layout -->
+
+{% endblock %}

@@ -1,0 +1,76 @@
+
+
+{% extends 'base_panel.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+
+{% block content %}
+
+<div class="layout">
+	<!-- Start of Sign In -->
+	<div class="main order-md-1">
+		<div class="start">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="content">
+						<h1>Sign in to Medau</h1>
+						<div class="third-party">
+							<div class="socialaccount_ballot">
+
+							  <span class="socialaccount_providers">
+								{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+							  </span>
+
+							</div>
+<!--							<a  class="btn item bg-yellow">-->
+<!--								<i class="fa-brands fa-google fa-xl"></i>-->
+<!--							</a>-->
+						</div>
+						{% get_providers as socialaccount_providers %}
+
+						{% if socialaccount_providers %}
+						<p>{% blocktrans with site.name as site_name %}Please sign in with one
+						of your existing third party accounts. Or, sign in</a>
+						for a {{ site_name }} account  below:{% endblocktrans %}</p>
+
+
+						{% include "socialaccount/snippets/login_extra.html" %}
+
+						{% else %}
+						<p>{% blocktrans %}If you have not created an account yet, then please
+						<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+						{% endif %}
+
+						<form class="login" method="POST" action="{% url 'account_login' %}">
+						  {% csrf_token %}
+						  {{ form.as_p }}
+						  {% if redirect_field_value %}
+						  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+						  {% endif %}
+						  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+						  <button class="primaryAction" href="{% url 'core:panel' %}" type="submit">{% trans "Sign In" %}</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Sign In -->
+	<!-- Start of Sidebar -->
+	<div class="aside order-md-2">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="preference">
+					<h2>Hello, Friend!</h2>
+					<p>Enter your personal details and start your journey with Medau social platform today.</p>
+					<a href="{% url 'account_signup' %}" class="btn button">Sign Up</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Sidebar -->
+</div> <!-- Layout -->
+
+{% endblock %}
