@@ -1,5 +1,5 @@
 
-## BLO - Buduj, Licz, Oszczędzaj
+## Medau - Social Platform
 A full social networking platform with real-time chat messenger
 and video chat option, this is my current project.
 Still many functionalities are not ready yet.
