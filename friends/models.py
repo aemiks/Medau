@@ -20,11 +20,7 @@ class FriendList(models.Model):
         """
         Return number of friends
         """
-        count = 0
-        friends = self.friends.all()
-        for friend in friends:
-            count +=1
-        return count
+        return self.friends.all().count()
 
     def add_friend(self, account):
         """
